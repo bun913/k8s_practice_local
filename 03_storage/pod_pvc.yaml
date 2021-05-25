@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: helloworld-pvc
+  name: helloworld-pvc
+spec:
+  containers:
+  - image: gcr.io/google-samples/hello-app:1.0
+    name: helloworld-pvc
+    ports:
+    - containerPort: 8080
+    resources: {}
+    volumeMounts:
+      # Volume名を指定
+    - name: my-pv
+      # Volumeをマウントするコンテナ内のファイルパスを指定
+      mountPath: /mnt/pvc
+  volumes:
+    # 作成するVolume名を指定
+    - name: my-pv
+      # 永続ボリューム要求名を指定
+      persistentVolumeClaim:
+        claimName: pvc

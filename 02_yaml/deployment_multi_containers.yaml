@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: helloworld
+  name: helloworld
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      run: helloworld
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: helloworld
+    spec:
+      containers:
+      - command:
+        - /bin/sh
+        - -c
+        - sleep 500
+        image: busybox
+        name: sleep
+        ports:
+        - containerPort: 80
+      - image: gcr.io/google-samples/hello-app:1.0
+        name: helloworld
+        ports:
+        - containerPort: 8080
+status: {}

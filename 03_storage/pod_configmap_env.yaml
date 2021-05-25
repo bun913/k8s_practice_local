@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: helloworld-configmap-env
+  name: helloworld-configmap-env
+spec:
+  containers:
+  - env:
+    # 環境変数の名前を定義
+    - name: TEST_ENV
+      valueFrom:
+        configMapKeyRef:
+          # ConfigMapの名前を指定
+          name: my-config
+          # ConfigMapのKeyを指定
+          key: TEST_ENV
+    image: gcr.io/google-samples/hello-app:1.0
+    name: helloworld-configmap-env
+    ports:
+    - containerPort: 8080
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}

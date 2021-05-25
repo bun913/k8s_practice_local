@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: db
+  name: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: db
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: db
+    spec:
+      containers:
+      - env:
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_PASSWORD
+          value: postgres
+        image: postgres:9.4
+        name: db
+        ports:
+        - containerPort: 5432
+        resources: {}
+status: {}
